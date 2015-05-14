@@ -544,12 +544,11 @@ static void ProcessTriangleInternal(const VertexShader::OutputVertex& v0,
                         result = (result * input[2].Cast<int>()) / 255;
                         return result.Cast<u8>();
                     }
-					case Operation::Dot3_RGB:
-					{
-						auto result = Math::Dot(input[0], input[1]);
-						return{ result, result, result };
-					}
-
+                    case Operation::Dot3_RGB:
+                    {
+                        auto result = 4 * Math::Dot(input[0] - Math::MakeVec<u8>(127, 127, 127), input[1] - Math::MakeVec<u8>(127, 127, 127));
+                        return{ result, result, result };
+                    }
                     default:
                         LOG_ERROR(HW_GPU, "Unknown color combiner operation %d\n", (int)op);
                         UNIMPLEMENTED();
