@@ -546,7 +546,9 @@ static void ProcessTriangleInternal(const VertexShader::OutputVertex& v0,
                     }
                     case Operation::Dot3_RGB:
                     {
-                        auto result = 4 * Math::Dot(input[0] - Math::MakeVec<u8>(127, 127, 127), input[1] - Math::MakeVec<u8>(127, 127, 127));
+                        //TODO : verify if 0.5 = 127 or 128
+                        auto result = 4 * Math::Dot(input[0] - Math::MakeVec<u8>(128, 128, 128), input[1] - Math::MakeVec<u8>(128, 128, 128));
+                        result = std::max(0,std::min(255,result));
                         return{ result, result, result };
                     }
                     default:
