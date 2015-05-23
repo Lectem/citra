@@ -546,10 +546,13 @@ static void ProcessTriangleInternal(const VertexShader::OutputVertex& v0,
                     }
                     case Operation::Dot3_RGB:
                     {
-                        //TODO : verify if 0.5 = 127 or 128
-                        auto result = 4 * Math::Dot(input[0] - Math::MakeVec<u8>(128, 128, 128), input[1] - Math::MakeVec<u8>(128, 128, 128))/255;
+                        //Not fully accurate
+                        //For hardware tests please check : https://github.com/Lectem/3DS_gpu_tests/tree/DOT3_RGB/
+                        int result = ((input[0].r() * 2 - 255) * (input[1].r() * 2 - 255)) / 256 +
+                                     ((input[0].g() * 2 - 255) * (input[1].g() * 2 - 255)) / 256 +
+                                     ((input[0].b() * 2 - 255) * (input[1].b() * 2 - 255)) / 256;
                         result = std::max(0,std::min(255,result));
-                        return{ result, result, result };
+                        return{ (u8)result, (u8)result, (u8)result };
                     }
                     default:
                         LOG_ERROR(HW_GPU, "Unknown color combiner operation %d\n", (int)op);
