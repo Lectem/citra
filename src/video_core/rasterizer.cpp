@@ -548,9 +548,9 @@ static void ProcessTriangleInternal(const VertexShader::OutputVertex& v0,
                     {
                         //Not fully accurate
                         //For hardware tests please check : https://github.com/Lectem/3DS_gpu_tests/tree/DOT3_RGB/
-                        int result = ((input[0].r() * 2 - 255) * (input[1].r() * 2 - 255)) / 256 +
-                                     ((input[0].g() * 2 - 255) * (input[1].g() * 2 - 255)) / 256 +
-                                     ((input[0].b() * 2 - 255) * (input[1].b() * 2 - 255)) / 256;
+                        int result = ((input[0].r() * 2 - 255) * (input[1].r() * 2 - 255)+128) / 256 +
+                                     ((input[0].g() * 2 - 255) * (input[1].g() * 2 - 255)+128) / 256 +
+                                     ((input[0].b() * 2 - 255) * (input[1].b() * 2 - 255)+128) / 256;
                         result = std::max(0,std::min(255,result));
                         return{ (u8)result, (u8)result, (u8)result };
                     }
