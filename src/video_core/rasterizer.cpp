@@ -546,8 +546,7 @@ static void ProcessTriangleInternal(const VertexShader::OutputVertex& v0,
                     }
                     case Operation::Dot3_RGB:
                     {
-                        //Not fully accurate
-                        //For hardware tests please check : https://github.com/Lectem/3DS_gpu_tests/tree/DOT3_RGB/
+                        // Not fully accurate
                         int result = ((input[0].r() * 2 - 255) * (input[1].r() * 2 - 255)+128) / 256 +
                                      ((input[0].g() * 2 - 255) * (input[1].g() * 2 - 255)+128) / 256 +
                                      ((input[0].b() * 2 - 255) * (input[1].b() * 2 - 255)+128) / 256;
